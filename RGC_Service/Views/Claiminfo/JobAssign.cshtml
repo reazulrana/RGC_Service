@@ -1,0 +1,62 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@model JobAssignViewModel
+@{
+	ViewBag.Title = "JobAssign";
+}
+@using(Html.BeginForm("JobAssign","Claiminfo",FormMethod.Post))
+{
+<div class="card">
+	<div class="card-header bg-gradient-indigo">
+		<h3 class="card-title">Job Assign</h3>
+	</div>
+
+	<div class="card-body">
+		<div class="row mb-2">
+			
+			@Html.LabelFor(m => m.JobCode, new { @class = "control-label col-md-2" })
+			<div class="col-md-3">
+				@Html.TextBoxFor(m => m.JobCode, new { @class = "form-control", @readonly = "readonly" })
+			</div>
+			@Html.LabelFor(m => m.jobstatus.Branch, new { @class = "control-label col-md-2" })
+			<div class="col-md-3">
+				@Html.TextBoxFor(m => m.jobstatus.Branch, new { @class = "form-control", @readonly = "readonly" })
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				@Html.Partial("_PartialJobAssign", Model)
+			</div>
+		
+			
+			<div class="col-md-6">
+				<fieldset disabled>
+					@Html.Partial("_PartialCustomerDetails", Model.jobstatus)
+				</fieldset>
+			</div>
+		
+		</div>
+		<fieldset disabled>
+
+			<div class="row">
+				<div class="col-md-6">
+					@Html.Partial("_PartialDateinfo", Model.jobstatus)
+				</div>
+				<div class="col-md-6">
+					@Html.Partial("_PartialProductDetails", Model.jobstatus)
+				</div>
+
+			</div>
+			</fieldset>
+
+	</div>
+	@* ENd of Card Body *@
+	@*<div class="card-footer">
+		<div class="row">
+			<div class="col-md-3">
+				<input type="submit" class="btn btn-primary" value="Save" />
+			</div>
+		</div>
+	</div>*@
+</div>
+}
+

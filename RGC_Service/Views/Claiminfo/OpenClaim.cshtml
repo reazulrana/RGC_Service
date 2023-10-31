@@ -1,0 +1,118 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@model OpenClaim
+@{
+    /**/
+
+    ViewBag.Title = "OpenClaim";
+}
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtJobCode').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("GetJobCodeList", "Others")',
+                    contentType: "Application/Json;charset=utf-8",
+                    dataType:"JSON",
+                    type: "POST",
+                    data: JSON.stringify({
+                        term: request.term,
+						BranchName: $('#drdBranch').val(),
+						cflag: @Model.cFlag
+                    }),
+                    success: function (data) {
+
+                        response(data);
+                    }, error: function (err) {
+                        alert(err);
+                    }
+
+                })
+
+            }   
+//End ajax function
+        })
+		//End autocomplete function
+
+    })
+
+
+</script>
+
+
+
+
+@using (Html.BeginForm("OpenClaim", "Claiminfo", FormMethod.Post))
+{
+    Html.AntiForgeryToken();
+	@Html.HiddenFor(m => m.ClaimStatus);
+    <div class="col-md-8 mt-4">
+
+        <div class="card">
+
+            <div class="card-header bg-red">
+                <h2 class="card-title">Open Claim</h2>
+            </div>
+            <div class="card-body">
+
+                <div class="row mb-2">
+
+
+
+                    <label for="branchDropDown" class="control-label col-md-3">Select Branch</label>
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.BranchName, Model.ListofBranch, new { @class = "form-control", @id = "drdBranch" })
+                        @Html.ValidationMessageFor(m => m.BranchName, null, new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+
+
+                <!--------------------------------------- End of BranchName Section ------------------------------>
+
+                <div class="row mb-2">
+
+
+
+                    <label for="branchDropDown" class="control-label col-md-3">Open Job</label>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.JobCode, new { @class = "form-control", @id = "txtJobCode" })
+                        @Html.ValidationMessageFor(m => m.JobCode, null, new { @class = "text-danger text-md" })
+
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+
+                    @if (Model.isFound == false)
+                    {
+                        <label for="branchDropDown" class="col-md-3"></label>
+                        <div class="col-md-9">
+                            @Html.ValidationMessage("Nnone", "'Job No' Not Found in the Database", new { @class = "text-danger text-md" })
+                            @*<input class="form-control disabled text-red" disabled type="text" value="Job No Not Found in the Database" />*@
+                        </div>
+                    }
+                                       
+                </div>
+
+
+                @*-------------------------- Button Sectio ----------------*@
+
+                <div class="row">
+                    <div class="col-md-3  offset-md-3">
+                        
+                        <input type="submit" class="btn  btn-sm btn-default" value="Open Claim" />
+                    </div>
+                </div>
+
+            </div>
+           
+        </div>
+
+    </div>
+}

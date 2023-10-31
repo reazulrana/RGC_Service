@@ -1,0 +1,26 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@using DAL_Service.Model
+@model List<ServiceItem>
+@{
+    ViewBag.Title = "Item";
+    Layout = null;
+}
+
+
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Item</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

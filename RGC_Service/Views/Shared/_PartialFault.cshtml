@@ -1,0 +1,16 @@
+﻿@using DAL_Service.Model
+@model List<ClaimListModel>
+
+
+<div class="row">
+    @foreach (ClaimListModel item in Model)
+    {
+
+        <label class="col-md-4" style="font-size:12px">
+            <input name="Fault" value="@item.Claim" checked="@item.IsSelected" type="checkbox" /> @item.Claim
+        </label>
+
+
+
+    }
+</div>

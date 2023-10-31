@@ -1,0 +1,21 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@using DAL_Service.Model
+@model List<ServiceItem>
+@{
+    ViewBag.Title = "Item";
+    Layout = null;
+}
+
+
+            @foreach (var item in Model)
+            {
+<div class="row">
+    <div class="col-sm-12">
+        <h6 class="py-2" style="border-bottom:1px solid lightgray">@item.Item</h6>
+    </div>
+</div>
+
+}
+
+
+        

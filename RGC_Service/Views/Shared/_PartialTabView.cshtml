@@ -1,0 +1,83 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model;
+
+@model JobStatusViewModel
+
+
+
+
+
+
+    <div class="card">
+        <div class="card-header bg-cyan">
+            <h3 class="card-title">Other Information</h3>
+        </div>
+        <div class="card-body" style="min-height:190px">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <ul class="nav nav-tabs mb-3">
+                        <li class="active nav-item"><a href="#divItem" class="nav-link" data-toggle="tab">Item</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#divWarranty" data-toggle="tab">Warranty</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#divFailure" data-toggle="tab">Failure Description</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active text-xs" id="divItem">
+                            @Html.Partial("_PartialItemList", Model.ListofItem)
+                        </div>
+
+                        <div class="tab-pane" id="divWarranty">
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <div class="row">
+                                        <label class="control-label">
+                                            <input type="radio" name="Wcondition" checked="@Model.isSalesWarr" value="0" /> Sales-Warranty
+                                        </label>
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="control-label">
+                                            <input type="radio" name="Wcondition" checked="@Model.isNonWarr" value="1" /> Non-Warranty
+                                        </label>
+                                    </div>
+                                    <div class="row">
+                                        <label class="control-label">
+                                            <input type="radio" name="Wcondition" checked="@Model.isSVCWarr" value="2" /> Svc-Warranty
+                                        </label>
+                                    </div>
+                                </div>
+								<div class="col-md-8">
+									<div class="row mb-1">
+										@Html.LabelFor(m => m.PDate, new { @class = "Control-label col-md-5" })
+										<div class="col-md-7">
+											@Html.TextBoxFor(m => m.PDate, new { @class = "form-control", @readonly = "readonly" })
+										</div>
+									</div>
+
+									<div class="row">
+										@Html.LabelFor(m => m.LastJobNO, new { @class = "Control-label col-md-5" })
+										<div class="col-md-7">
+											@Html.TextBoxFor(m => m.LastJobNO, new { @class = "form-control", @readonly = "readonly" })
+										</div>
+									</div>
+								</div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="divFailure">
+                            @foreach (var item in Model.ListofComplain)
+                            {
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6 class="py-2 text-xs" style="border-bottom:1px solid lightgray">@item.ClaimCode</h6>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

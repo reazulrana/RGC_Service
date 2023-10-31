@@ -1,0 +1,77 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+
+@model JobStatusViewModel
+
+
+
+
+<div class="card">
+    <div class="card-header bg-gradient-cyan">
+        <h3 class="card-title">Bill Information</h3>
+    </div>
+	<div class="card-body">
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.DDate, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.DDate, "{0:dd-MMM-yyyy}", new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.DeliverBy, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.DeliverBy, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.PrdAmt, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.PrdAmt, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.FaultFindingCharge, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.FaultFindingCharge, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.RepairCharge, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.RepairCharge, new { @class = "form-control" })
+			</div>
+		</div>
+
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.VatAmnt, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.VatAmnt, new { @class = "form-control" })
+			</div>
+		</div>
+
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.OtherAmt, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.OtherAmt, new { @class = "form-control" })
+			</div>
+		</div>
+
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.Dis, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.Dis, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.AdvanceAmnt, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.AdvanceAmnt, new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.TotalAmount, new { @class = "control-label col-md-5" })
+			<div class="col-md-7">
+				@Html.TextBoxFor(x => x.TotalAmount, new { @class = "form-control text-highlight" })
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@model JobStatusViewModel
+
+
+
+<div class="card">
+    <div class="card-header bg-cyan">
+        <h1 class="card-title">Date Information</h1>
+    </div>
+	<div class="card-body">
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.ReceptDate, new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBoxFor(m => m.ReceptDate, "{0:dd-MMM-yyyy}", new { @class = "form-control" })
+			</div>
+
+		</div>
+
+
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.ReceptBy, new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBoxFor(m => m.ReceptBy, new { @class = "form-control" })
+			</div>
+		</div>
+
+
+		<div class="row  mb-md-1">
+			@Html.LabelFor(m => m.SDate, new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBoxFor(m => m.SDate, "{0:dd-MMM-yyyy}", new { @class = "form-control" })
+			</div>
+		</div>
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.ServiceBy, new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBoxFor(m => m.ServiceBy, new { @class = "form-control" })
+			</div>
+		</div>
+
+		<div class="row mb-md-1">
+			@Html.LabelFor(m => m.AppDelDate, new { @class = "control-label col-md-4" })
+			<div class="col-md-8">
+				@Html.TextBoxFor(m => m.AppDelDate, "{0:dd-MMM-yyyy}", new { @class = "form-control" })
+			</div>
+		</div>
+
+	</div>
+</div>
+

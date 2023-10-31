@@ -1,0 +1,50 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@using DAL_Service.Model
+@model List<ServiceDetail>
+
+
+@*<div class="card">
+    <div class="card-header bg-cyan">
+<h3 class="card-title">Parts Information</h3>
+    </div>
+	<div class="card-body" style=" min-height:325px;">
+
+		<div class="col-md-12">
+			<div class="row">*@
+
+				<table class="table table-responsive table-bordered table-hover">
+					<thead class="bg-gray">
+						<tr>
+							<th>SL No</th>
+							<th>Part No</th>
+							<th>Description</th>
+							<th>Qty</th>
+							<th>Unit Price</th>
+							<th>Total Amount</th>
+						</tr>
+					</thead>
+					<tbody>
+						@{
+							int intsl = 1;
+							foreach (var item in Model)
+							{
+
+								double? amount = item.UnitPrice * item.Qty;
+								<tr>
+									<td>@intsl</td>
+									<td>@item.ProductCode</td>
+									<td>@item.ProdName</td>
+									<td>@item.Qty</td>
+									<td>@item.UnitPrice</td>
+									<td>@amount</td>
+								</tr>
+								intsl += intsl;
+							}
+
+						}
+					</tbody>
+				</table>
+			@*</div>
+		</div>
+	</div>
+</div>*@

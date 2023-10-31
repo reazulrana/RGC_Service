@@ -1,0 +1,453 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model;
+@model ProductServiceViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<style>
+    #alertMessage {
+        height: 25px;
+        padding: 0px;
+    }
+    .diplaynone{
+        display:none
+    }
+</style>
+
+<script lang="ja" type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Data Picker
+        $('.datepicker').datepicker({
+            dateFormat: "dd-mm-yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1980:+10"//,
+            //showOn:"both",
+            //buttonText: "<i class='fa fa-clock'></i>"
+           
+
+        });
+
+        //Refuse Checkbox Event
+        $("#chkRefuse").click(function () {
+            if ($(this).prop("checked") == true) {
+                $("#divRefuse").removeClass('diplaynone')
+            }
+            else {
+                $("#divRefuse").addClass('diplaynone')
+            }
+
+
+        })
+
+
+
+
+
+
+        //Qty Field Change Event
+
+        $('#txtQty').keyup(function () {
+
+
+
+            if ($(this).val() != '') {
+                var blnFlag = CheckValidation();
+            if (blnFlag == false) {
+                return;
+            }
+
+            }
+            //Call function of Total Amount
+            //Calculattion of Total Amount in function
+            TotalAmount();
+
+        })
+
+        //End of Qty Field Change Event
+
+
+         //Start check validation (Qty, Price)
+
+        function CheckValidation() {
+            var _partno = $('#txtPartNo').val();
+            var _Qty = $('#txtQty').val();
+            var _Price = $('#txtUnitPrice').val();
+
+            var _QtyFlag = CheckNumeric(_Qty);
+            var _QtyPrice = CheckNumeric(_Price);
+            var blnFlag = true;
+
+
+            if (_partno.length == 0) {
+                $(alertMessage).html("<a class='close' href='#' id='linkalert'>&times;</a> <strong> Error: </strong> Partno is not found")
+
+                $('#txtSearchPartNo').focus();
+                blnFlag = false;
+                return blnFlag
+            }
+
+            if (_QtyFlag == false) {
+                $(alertMessage).html("<a class='close' href='#' id='linkalert'>&times;</a> <strong> Error: </strong> Qty Is invalid format")
+                  $('#txtQty').focus();
+
+                blnFlag = false;
+                return blnFlag
+            }
+
+
+            if (_QtyPrice == false) {
+                $(alertMessage).html("<a class='close' href='#' id='linkalert'>&times;</a>  <strong>Error: </strong> Price Is invalid format")
+
+                $('#txtUnitPrice').focus();
+
+                blnFlag = false;
+                return blnFlag
+            }
+
+            return blnFlag;
+
+        }
+
+        //end   check validation (Qty, Price)
+
+
+
+        
+
+
+
+
+        //Start Function Total Amount
+        //Sum Total AMount of Qty and Price
+        function TotalAmount() {
+
+            var _Qty = $('#txtQty').val();
+            var _Price = $('#txtUnitPrice').val();
+            var TotalPrice = _Qty * _Price
+
+            $('#txtTotalAmount').val(TotalPrice);
+        }
+
+        //End Function Total Amount
+
+
+        //Check Numeric Validation
+        function CheckNumeric(value) {
+            var flag = $.isNumeric(value);
+
+            return flag;
+        }
+        //End  Numeric Validation
+
+
+        //--------- Add Button Function ----------------
+        $("#btnAddProduct").click(function () {
+
+            var ProductTable = $('#pTable tbody');
+            var _partno = $('#txtPartNo').val();
+            var _Description = $('#txtDescription').val();
+            var _Mesurement = $('#txtMeasurement').val();
+            var _Qty = $('#txtQty').val();
+            var _Price = $('#txtUnitPrice').val();
+
+            var _TotalAmount = 0;
+            var _CheckValidation = CheckValidation();
+
+         
+
+            //chekc qty and price and partno validation
+            if (_CheckValidation == false) {
+                $("#alertMessage").show('fade')
+                setTimeout(function () {
+                    $("#alertMessage").hide('fade')
+                }, 3000)
+                alert("'" + _partno + "' Is Duplicate in the List")
+                return;
+            }
+
+            //Check Duplicate Row
+            var Rows = $('#pTable tbody tr')
+            var IsDuplicate = false;
+            $(Rows).each(function ()
+            {
+                if (_partno.toLowerCase() == $(this).find("td:eq(1)").text().toLowerCase()) {
+                    IsDuplicate = true
+                    return
+                }
+
+            })
+
+            if (IsDuplicate == true) {
+            
+                $('#alertMessage').html("<strong>Error :(" + _partno + ")</strong> Is Duplicate in the List")
+
+                $("#alertMessage").show('fade')
+
+                
+                setTimeout(function () {
+                    $("#alertMessage").hide('fade')
+                }, 3000)
+                alert("'" + _partno + "' Is Duplicate in the List")
+                return
+            }
+
+     
+           
+
+            _TotalAmount = $('#txtTotalAmount').val();
+            var row = '<tr>'
+            row += "<td hidden> <input type='hidden'  name='PartNo' value='" + _partno +"' /> </td>"
+            row += "<td>" + _partno + "</td>"
+            row += "<td hidden> <input type='hidden'  name='Description' value='" + _Description + "' /> </td>"
+            row += "<td>" + _Description + "</td>"
+            row += "<td hidden> <input type='hidden'  name='Qty' value='" + _Qty + "' /> </td>"
+            row += "<td>" + _Qty + "</td>"
+            row += "<td hidden> <input type='hidden'  name='Price' value='" + _Price + "' /> </td>"
+            row += "<td>" + _Price + "</td>"
+            row += "<td>" + _TotalAmount + "</td>"
+
+
+            row += "<td><button type='button' class='btn btn-danger btn-sm' onclick='RemoveRow(this)'>Delete</button></td>"
+            row += '</tr>'
+
+            $(ProductTable).append(row);
+
+        })
+
+
+   //--------- End Add Button Function ----------------
+
+
+        
+
+
+
+        $("#txtPartNo").focusout(function () {
+            var _code = $("#txtPartNo").val();
+
+
+            $.ajax({
+                url: '@Url.Action("ProductSearch", "ProductService")',
+                dataType: 'JSON',
+                data: {
+                    term: _code
+                },
+                contentType: 'Application/Json;Charset=Utf-8',
+                success: function (data) {
+
+                    //data = JSON.stringify(data);
+                    if (data.isSuccess == true) {
+
+
+
+                        $("#txtPartNo").val(data._Product.Code);
+                        $("#txtDescription").val(data._Product.ProdName);
+                        $("#txtUnitPrice").val(data._Product.UnitPrice);
+
+                        $("#txtMeasurement").val(data._Product.Measure);
+
+
+                    }
+
+                },
+                error: function () {
+                    alert("Found Porblem in Search Process")
+                }
+            })
+
+
+
+        })
+                //--------- End Search Text Box Part No ----------------
+
+        function SearchProduct(value) {
+
+            var val = true;
+
+
+            return val;
+        }
+
+                //--------- End Ajax Function----------------
+
+
+
+    })
+
+    //end Jquery Section
+
+
+
+
+    
+
+    //Start of JavaScript Section
+
+    function RemoveRow(value) {
+        $(value).closest('tr').remove();
+
+    }
+
+</script>
+
+
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("Save", "ProductService", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken();
+
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h2 class="card-title">Product Repair</h2>
+                    @Html.HiddenFor(m => m.JobCode)
+                </div>
+
+                <!--End of Card Header-->
+
+                <div class="card-body">
+
+
+
+                    <div class="row col-md-12 bg-gray-light">
+
+                        <h4 class="pl-4 text-gray"><u>Add Product</u></h4>
+                    </div>
+
+                    <!--End of Row Header Title -->
+                    <div class="row py-2">
+
+                        <label for="txtParno" class="control-label col-md-1">Part no:</label>
+                        <input type="text" class="form-control col-md-3" placeholder="Enter Product Code" id="txtPartNo" />
+
+
+                        <label for="txtDescription" class="control-label  col-md-2">Description</label>
+                        <input type="text" class="form-control  col-md-3" placeholder="Enter Product Name" id="txtDescription" />
+
+                        <label for="txtQty" class="control-label  col-md-1">Qty</label>
+                        <input type="text" class="form-control col-md-2" placeholder="Type Qty" id="txtQty" />
+                    </div>
+
+                    <!--End of Row Product Details -->
+                    <div class="row mt-3">
+
+
+
+
+                        <label for="txtUnitPrice" class="control-label   col-md-1">Unit Price</label>
+                        <input type="text" class="form-control   col-md-3" placeholder="Enter Unit Price" id="txtUnitPrice" />
+
+
+                        <label for="txtTotalAmount" class="control-label    col-md-2">Total Amount</label>
+                        <input type="text" class="form-control    col-md-3" id="txtTotalAmount" />
+                        <div class="col-md-2 offset-md-1 mt-sm-2">
+                            <button type="button" id="btnAddProduct" class="btn btn-danger btn-block">Add Parts</button>
+                        </div>
+                        <div class="col-md-12 py-3">
+                            <div id="alertMessage" class="alert alert-danger  pl-md-3 pl-sm-2 collapse">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                   
+
+                    <!--End of Row Product Details -->
+
+                                       
+
+                    <hr />
+
+
+
+                    <div class="row mt-md-2">
+                        <table class="table table-responsive-sm table-striped" id="pTable">
+                            <thead class="bg-cyan">
+                                <tr>
+                                    <th>Part No.</th>
+                                    <th>Description</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Amount</th>
+                                    <th colspan="2">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!--End of Table Row-->
+
+
+
+                </div>
+                <!--End of Card Body-->
+
+
+                <div class="card-footer">
+                    <div class="row">
+
+
+                        @Html.LabelFor(m => m.ServiceBy, new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.ServiceBy, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-2">
+                            <input id="txtServiceBy" readonly class="form-control" />
+                        </div>
+
+
+                        @Html.LabelFor(m => m.ServiceDate, new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.ServiceDate, new { @class = "form-control datepicker" })
+                        </div>
+                        
+                        @Html.LabelFor(m => m.Remarks, new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.Remarks, new { @class = "form-control" })
+                        </div>
+
+                    </div>
+                    <!--End of Row-->
+                    <div class="row py-3">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <label class="control-label col-md-12">
+                                    <input type="checkbox" id="chkRefuse" /> Refuse Description
+                                </label>
+                                <div class="col-md-12 diplaynone" id="divRefuse">
+                                    @Html.TextAreaFor(m => m.RefuseDescription, 3, 25, new { @class = "form-control" })
+                                    @Html.LabelFor(m => m.RefuseAmount, new {@class="control-label col-md-12" })
+                                    @Html.TextBoxFor(m => m.RefuseAmount, new { @class = "form-control col-md-4" })
+                                </div>
+                            </div>
+                            <!--End of Row -->
+
+                        </div>
+
+                        <div class="col-md-2 mt-md-4 mt-sm-2 offset-md-1">
+                            <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End of Card Footer-->
+            </div>
+        }
+        <!--End Of Begin Form Method-->
+    </div>
+    <!-- End of first Col-md-12-->
+
+</div>
+
+
+

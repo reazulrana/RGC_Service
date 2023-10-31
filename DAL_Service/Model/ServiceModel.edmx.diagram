@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7afd3302765d4aa09ee6a31709bd2d1f" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="RELServiceModel.Branch" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.BrandModel" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.CashSale" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.cFlagDetail" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.ClaimList" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.cType" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.CustomerClaimOther" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Department" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.dtproperty" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.EstimateRefused" Width="1.5" PointX="8.75" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.LogUser" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.NRDetail" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.NROther" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Pending" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.PendingOther" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Personal" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Product" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.RPTHowTimeBillPrint" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.SecurityProfile" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.SoftUser" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbBill" Width="1.5" PointX="12.75" PointY="8.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbBill_FFC" Width="1.5" PointX="8.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbGrade" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbl_RptTechnicianPerformance" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tblDailyInOut" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tblItemCap" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tblServiceCharge" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbReminder" Width="1.5" PointX="2.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbSM" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbSMSReceipentList" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbStoregeSET" Width="1.5" PointX="12.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbTechPerformancSummary" Width="1.5" PointX="14.75" PointY="15.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.tbVATSetting" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.TempMIS_Report" Width="1.5" PointX="16.75" PointY="3.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.TempService" Width="1.5" PointX="16.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.TransferJob" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.CustomerClaim" Width="1.5" PointX="4.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Designation" Width="1.5" PointX="18.75" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Replace" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.SecurityProfile2" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.ServiceDetail" Width="1.5" PointX="6.75" PointY="19.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryFind" Width="1.5" PointX="10.75" PointY="19.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryFind1" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryFindProduct" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryFindProduct1" Width="1.5" PointX="16.75" PointY="20.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryGrade" Width="1.5" PointX="20.75" PointY="18.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryKPII" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.qryRptClaimInfo" Width="1.5" PointX="12.75" PointY="21.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Query4" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.RTPBrandMaster" Width="1.5" PointX="22.75" PointY="10.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.VIEW1" Width="1.5" PointX="22.75" PointY="13.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.VW_Advance_Info" Width="1.5" PointX="22.75" PointY="16.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.vw_BrandModel" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.VW_CashSales" Width="1.5" PointX="4.75" PointY="23.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.vw_TransferJob" Width="1.5" PointX="6.75" PointY="23.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.Brand" Width="1.5" PointX="2.625" PointY="0.875" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.ClaimInfo" Width="1.5" PointX="25.375" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="RELServiceModel.ServiceItem" Width="1.5" PointX="0.75" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

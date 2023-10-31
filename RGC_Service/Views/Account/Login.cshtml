@@ -1,0 +1,99 @@
+﻿@using RGC_Service.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<style>
+    /*midalign for vertical middle of form*/
+    /*Start .midalign*/
+    .midalign{
+        margin-top:30px;
+    }
+    /*End .midalign*/
+</style>
+<div class="row justify-content-center align-content-center">
+    
+    <div class="col-md-4">
+        <div class="midalign">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="card">
+                    <div class="card-header  bg-gradient-blue">
+                        <h4>Use a local account to log in.</h4>
+                    </div>
+                    <div class="card-body">
+                        <section id="loginForm">
+
+
+
+
+
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <p>
+                                    <a href='@Url.Action("ForgetPassword","Account")'>Forget Password</a>
+
+
+                                </p>
+                            </div>
+
+                            @* Enable this once you have account confirmation enabled for password reset functionality
+                        <p>
+                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                        </p>*@
+
+                        </section>
+                    </div>
+                    <div class="card-footer bg-white">
+
+                        <div class="form-group">
+
+                            <input type="submit" value="Log in" class="btn btn-block btn-success" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+            @* End if Class Card *@
+        </div>
+        @* End if class midalign *@
+    </div>
+    @*<div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>*@
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

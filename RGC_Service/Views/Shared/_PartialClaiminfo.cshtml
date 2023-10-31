@@ -1,0 +1,538 @@
+﻿@model RGC_Service.Models.RGC_Service_Project_Model.CreateJobViewModel
+
+<script lang="ja" type="text/javascript">
+    $(document).ready(function () {
+        //Date Picker Function
+
+
+        //$('.datePicker').datepicker({
+        //    dateFormat: 'dd-mm-yy',
+        //    changeMonth: true,
+        //    changeYear: true,
+        //    yearRange:"1990:+10"
+
+        //})
+
+		CallOnLoadForm();
+
+		function CallOnLoadForm()
+		{
+			var b = {};
+			var cat = $("#drdServiceType option:selected").val();
+			
+
+			var _receivedby = $('#txtReceptBy').val($('#Receptby').val());
+
+		
+
+            b.category = cat
+		
+		
+			//getAjax_Into_div('@Url.Action("GetBrandList", "Others")', "JSON", b, "GET", "Application/Json;Charset=Utf-8", "#drdBrand")
+		
+
+			if ('@Model.isEditable' == "1") {
+				b.JobCode='@Model.JobCode'
+			}
+				getAjax_Into_div('@Url.Action("GetAccessoriesByCategory", "Others")', "HTML", b, "GET", "Application/Json;Charset=Utf-8", "#divAccessories")
+            getAjax_Into_div('@Url.Action("GetFaultByCategory", "Others")', "HTML", b, "GET", "Application/Json;Charset=Utf-8","#divFault")
+			
+			
+		}
+
+        //Recept by Dropdown ClickEvent
+
+		$('#Receptby').change(function () {
+
+            var val = $(this).val();
+            $('#txtReceptBy').val(val);
+
+        })
+
+
+
+        $("#drdServiceType").change(function () {
+
+            var cat = $(this).val();
+
+            @*$.ajax({
+                url: '@Url.Action("GetBrandList","Claiminfo")',
+                dataType: "JSON",
+                type: "GET",
+                cache: false,
+                data: { category: cat },
+                contentType: "Application/Json;Charset=utf-8",
+                success: function (data) {
+
+                    var brandDropdown = "#drdBrand"
+                    $(brandDropdown).empty();
+                    var _option = '<option> Select Brand </option>';
+                    $(brandDropdown).append(_option)
+                    $.each(data, function (index, val) {
+
+                        _option = add_item_to_Dropdown(val.BrdID, val.BrandName, val.BrandName)
+                        $(brandDropdown).append(_option);
+                    })
+
+
+                },
+                error: function () {
+                    alert("Error On Prccessing Data")
+                }
+
+            })*@
+
+
+            var b = {};
+            b.category = cat
+
+			getAjax_Into_div('@Url.Action("GetBrandList", "Others")', "JSON", b, "GET", "Application/Json;Charset=Utf-8", "#drdBrand")
+            getAjax_Into_div('@Url.Action("GetAccessoriesByCategory", "Others")', "HTML", b,"GET", "Application/Json;Charset=Utf-8", "#divAccessories")
+            getAjax_Into_div('@Url.Action("GetFaultByCategory", "Others")', "HTML", b, "GET", "Application/Json;Charset=Utf-8","#divFault")
+		})
+
+
+		function getAjax_Into_div(url, dataType, Data,Type, contentType, divname)
+		{
+			$.ajax({
+				url: url,
+                dataType: dataType,
+                data: Data,
+                type: Type,
+				//data: { category: Data },
+				 contentType: contentType,
+                success: function (data) {
+
+					if (divname == "#divAccessories" || divname == "#divFault") {
+						$(divname).html(data);
+					}
+					else if (divname == "#drdBrand") {
+						$(divname).empty();
+						var brandDropdown = "#drdBrand"
+						var _option = '<option> Select Brand </option>';
+						$(divname).append(_option)
+						$.each(data, function (index, val) {
+
+							_option = add_item_to_Dropdown(val.BrdID, val.BrandName, val.BrandName)
+							$(divname).append(_option);
+						})
+					//$('#drdBrand').val('Model.Brand');
+					}
+					else if (divname == "#drdmodelno") {
+						$(divname).empty()
+						var _option = '<option> Select Model </option>';
+						$(divname).append(_option);
+                    $.each(data, function (index, val) {
+
+						_option = add_item_to_Dropdown(-1, val.Model, val.Model)
+						$(divname).append(_option);
+					})
+					}
+
+                },
+                error: function () {
+                    alert("Error On Prccessing Data")
+                }
+
+            })
+		}
+
+
+
+		function add_item_to_Dropdown(id, value, text)
+		{
+
+			var _option = '<option ';
+
+			if ($(id).length > 0 && id>-1) {
+				_option += 'id="' + id +'"' ;
+			}
+			if (value.length > 0) {
+				_option += ' value ="' + value +'"'
+			}
+
+			_option += '>' + text + '</option>'
+
+
+			return _option;
+		}
+
+        $("#drdBrand").change(function () {
+
+			var id =$("#drdBrand option:selected").attr("id");
+
+			@*$.ajax({
+				url: '@Url.Action("GetModelList","Claiminfo")',
+				dataType: "Json",
+				contentType: "Application/Json;Charset=utf-8",
+				data: { BrandId: id },
+
+				success: function (data) {
+					var _option = '<option> Select Brand </option>';
+					var modeldropdown = "#drdmodelno";
+					$(modeldropdown).append(_option);
+                    $.each(data, function (index, val) {
+
+						_option = add_item_to_Dropdown(-1, val.Model, val.Model)
+						$(modeldropdown).append(_option);
+					})
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					alert(xhr.status)
+				}
+
+
+			})*@
+			var b = {};
+			b.BrandId = id
+			getAjax_Into_div('@Url.Action("GetModelList","Claiminfo")', "JSON", b, "GET", "Application/Json;Charset=Utf-8", "#drdmodelno")
+
+        })
+
+
+
+
+    })
+</script>
+
+
+
+<div class="row mb-md-2">
+	@Html.LabelFor(m => m.Branch, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.Branch, Model.listofBranch, "Select Branch", new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.Branch, null, new { @class = "text-danger" })
+	</div>
+	@* ----------------------------------- End of Branch Field Section -----------------------------------*@
+	<label class="control-label col-md-2 offset-md-2">
+		<input type="radio" name="CustServiceType" value="Walking Service" checked="@Model.blnWalkingService" /> Walking Service
+	</label>
+	<label class="control-label col-md-2">
+		<input type="radio" name="CustServiceType" value="Home Service" checked="@Model.blnHomeService" /> Home Service
+	</label>
+
+	@*---------------------------------- End of Receive Process Field Section -----------------------------------*@
+</div>
+
+@* ----------------------------------- End of Branch row  Section -----------------------------------*@
+
+<div class="row mb-md-2">
+
+
+	@Html.LabelFor(m => m.JobCode, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@*@Html.HiddenFor(m => m.JobCode)*@
+		@Html.TextBoxFor(m => m.JobCode, new { @class = "form-control", @readonly="readonly" })
+		@Html.ValidationMessageFor(m => m.JobCode, null, new { @class = "text-danger" })
+	</div>
+
+
+
+	@Html.LabelFor(m => m.ReceptDate, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+
+
+		@Html.TextBoxFor(m => m.ReceptDate, "{0:dd-MMM-yy}", new { @class = "form-control datePicker", @placeholder = "dd/MM/yy" })
+		@Html.ValidationMessageFor(m => m.ReceptDate,null, new { @class = "text-danger" })
+
+	</div>
+
+</div>
+
+@* ---------------------------------- End of JobCode and ReceptDate Row ----------------------------------------- *@
+
+<div class="row  mb-md-2">
+
+	@Html.LabelFor(m => m.CustomerGrade, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.CustomerGrade, Model.listofCustomerGrade, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustomerGrade, null, new { @class = "text-danger" })
+	</div>
+
+
+	@Html.LabelFor(m => m.CustomerReference, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.CustomerReference, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustomerReference, null, new { @class = "text-danger" })
+	</div>
+
+</div>
+
+@* ---------------------------------- End of CustomerGrade and CustomerReference Row ----------------------------------------- *@
+
+
+
+<div class="row">
+
+	@Html.LabelFor(m => m.CustName, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.CustName, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustName, null, new { @class = "text-danger" })
+	</div>
+
+
+	@Html.LabelFor(m => m.CustAddress2, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.CustAddress2, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustAddress2, null, new { @class = "text-danger" })
+	</div>
+
+</div>
+
+@* ---------------------------------- End of CustName and CustAddress2 Row ----------------------------------------- *@
+
+<div class="row  mb-md-2">
+
+
+	<div class="col-sm-4 offset-md-2">
+		<label class="control-label">
+			<input type="checkbox" name="RELCustomer" checked="@Model.IsRel" value="" /> REL?
+			@Html.ValidationMessageFor(m => m.CustomerGrade, null, new { @class = "text-danger" })
+		</label>
+	</div>
+
+
+
+
+</div>
+
+@* ---------------------------------- End of RELCustomer Row ----------------------------------------- *@
+
+@*<div class="row mb-md-2">
+		@Html.LabelFor(m => m.IsssueDate, new { @class = "col-md-2 control-label" })
+		<div class="col-md-4">
+			@Html.TextBoxFor(m => m.IsssueDate, new { @class = "form-control" })
+		</div>
+
+		@Html.LabelFor(m => m.IssueTo, new { @class = "col-md-2 control-label" })
+		<div class="col-md-4">
+			@Html.DropDownListFor(m => m.IssueTo,Model.listofEmployee, new { @class = "form-control" })
+		</div>
+	</div>*@
+
+<div class="row  mb-md-2">
+
+	@Html.LabelFor(m => m.CustAddress1, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.CustAddress1, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustAddress1, null, new { @class = "text-danger" })
+	</div>
+
+
+	@Html.LabelFor(m => m.CustEmail, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.CustEmail, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.CustEmail, null, new { @class = "text-danger" })
+	</div>
+
+</div>
+
+@* ---------------------------------- End of CustAddress1 and CustEmail Row ----------------------------------------- *@
+<div class="row  mb-md-3">
+
+	@Html.LabelFor(m => m.PDate, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+
+		@Html.TextBoxFor(m => m.PDate, new { @class = "form-control datePicker", @placeholder = "dd/MM/yy" })
+		
+		@if (Model.blnPdateValidation == false)
+		{
+		<p class="text-danger">Purchase Date Is Required</p>
+		}
+
+	</div>
+
+
+
+	@Html.LabelFor(m => m.MRNO, new { @class = "control-label  col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.MRNO, new { @class = "form-control" })
+
+	</div>
+
+</div>
+
+@* ---------------------------------- End of PDate and MRNO Row ----------------------------------------- *@
+
+<div class="row mb-md-2">
+	<div class="col-md-6">
+		<div class="row">
+			<label class="control-label col-md-4">Warranty</label>
+
+			<label class="control-label text-small col-md-2">
+				<input name="WCondition" type="radio" checked="@Model.blnslswarranty" value="0" /> Warranty
+			</label>
+			<label class="control-label text-small col-md-3">
+				<input name="WCondition" checked="@Model.blnNonwarranty"  type="radio" value="1" /> Non-Warranty
+			</label>
+			<label class="control-label text-small col-md-3">
+				<input name="WCondition" type="radio" checked="@Model.blnSvcWarranty" value="2" /> Service-Warranty
+			</label>
+
+		</div>
+	</div>
+
+
+	@Html.LabelFor(m => m.AppDelDate, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+
+
+		@Html.TextBoxFor(m => m.AppDelDate, "{0:dd-MMM-yy}", new { @class = "form-control datePicker", @placeholder = "dd/MM/yy" })
+	</div>
+
+
+</div>
+
+@* ---------------------------------- End of WCondition and AppDelDate Row ----------------------------------------- *@
+
+<div class="row mb-md-2">
+
+	@Html.LabelFor(m => m.LastJobNO, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.LastJobNO, new { @class = "form-control" })
+
+	</div>
+
+</div>
+
+@* ---------------------------------- End of LastJobNO Row ----------------------------------------- *@
+
+<div class="row  mb-md-2">
+
+
+	@Html.LabelFor(m => m.ReceptBy, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@*@Html.TextBoxFor(m => m.ReceptBy, new { @class = "form-control" })*@
+		@Html.DropDownListFor(m => m.ReceptBy, Model.listofEmployee, "Select Employee", new { @class = "form-control", @id = "Receptby" })
+		<input type="text" readonly="readonly" class="form-control" id="txtReceptBy" />
+		@Html.ValidationMessageFor(m => m.ReceptBy, null, new { @class = "text-danger" })
+
+	</div>
+</div>
+
+@* ---------------------------------- End of ReceptBy Row ----------------------------------------- *@
+
+<div class="row  mb-md-2">
+
+	@Html.LabelFor(m => m.ServiceType, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.ServiceType, Model.listofCategory, "Select Category", new { @class = "form-control", @id = "drdServiceType" })
+		@Html.ValidationMessageFor(m => m.ServiceType, null, new { @class = "text-danger" })
+
+	</div>
+
+	@Html.LabelFor(m => m.Brand, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+
+		@*<select class="form-control" name="Brand" id="drdBrand"> <option>Select Brand</option></select>*@
+		@Html.DropDownListFor(m => m.Brand,Model.listofBrand ,"Select Brand", new { @class = "form-control", @id="drdBrand" })
+		@Html.ValidationMessageFor(m => m.Brand, null, new { @class = "text-danger" })
+	</div>
+
+
+</div>
+
+<div class="row  mb-md-2">
+
+	@Html.LabelFor(m => m.ModelNo, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.DropDownListFor(m => m.ModelNo,Model.listofModel, new { @class = "form-control", @id = "drdmodelno" })
+
+		@Html.ValidationMessageFor(m => m.ModelNo, null, new { @class = "text-danger" })
+	</div>
+
+
+
+
+	@Html.LabelFor(m => m.SLNo, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.SLNo, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.SLNo, null, new { @class = "text-danger" })
+	</div>
+
+
+</div>
+
+<div class="row  mb-md-2">
+
+	@Html.LabelFor(m => m.ESN, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.ESN, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.ESN, null, new { @class = "text-danger" })
+	</div>
+
+
+
+
+
+	@Html.LabelFor(m => m.PhyCond, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.PhyCond, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.PhyCond, null, new { @class = "text-danger" })
+	</div>
+
+</div>
+
+<div class="row  mb-md-2">
+
+
+	@Html.LabelFor(m => m.ReturnedItems, new { @class = "control-label col-md-2" })
+	<div class="col-md-4">
+		@Html.TextBoxFor(m => m.ReturnedItems, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.ReturnedItems, null, new { @class = "text-danger" })
+	</div>
+
+</div>
+
+
+<hr />
+
+
+
+@* ---------------------------------- End of ServiceType , Brand , ModelNo , SLNo , ESN , PhyCond Row ----------------------------------------- *@
+
+
+<div class="row  mb-md-2">
+
+
+
+	<label class="control-label col-md-3">Rec. Accessories</label>
+	<div class="col-md-9" id="divAccessories">
+	
+	</div>
+</div>
+
+<hr />
+@* ---------------------------------- End of divreturnItem Row ----------------------------------------- *@
+
+
+<div class="row  mb-md-2">
+
+
+	<label class="control-label col-md-3" style="color:red">Failure Description</label>
+	<div class="col-md-9" id="divFault">
+	
+	</div>
+</div>
+
+
+@* ---------------------------------- End of divFault Row ----------------------------------------- *@
+
+
+<div class="row mb-md-2">
+
+	<label class="control-label col-md-2">Customer Complain</label>
+	<div class="col-md-10">
+		@Html.TextBoxFor(m => m.CustomerClaimsOthers, new { @class = "form-control" })
+	</div>
+</div>
+<div class="row mb-md-2">
+	<label class="control-label col-md-2">Remarks</label>
+
+	<div class="col-md-10">
+		@Html.TextBoxFor(m => m.Remk, new { @class = "form-control" })
+	</div>
+</div>
+
+@* ---------------------------------- End of Customer Complain, Remarks Row ----------------------------------------- *@
+

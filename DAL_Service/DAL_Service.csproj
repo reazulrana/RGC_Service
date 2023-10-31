@@ -1,0 +1,296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A8F90A38-80EF-457A-90A2-B6D4981CB65A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL_Service</RootNamespace>
+    <AssemblyName>DAL_Service</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\aabc_Result.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Branch.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Brand.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BrandModel.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CashSale.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\cFlagDetail.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClaimInfo.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClaimList.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ClaimListModel.cs" />
+    <Compile Include="Model\cType.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerClaim.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerClaimOther.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Department.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Designation.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\dtproperty.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\dt_getpropertiesbyid_Result.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\dt_getpropertiesbyid_u_Result.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\EstimateRefused.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LogUser.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NRDetail.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NROther.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Pending.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PendingOther.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Personal.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Product.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryFind.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryFind1.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryFindProduct.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryFindProduct1.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryGrade.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryKPII.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\qryRptClaimInfo.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Query4.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Replace.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RPTHowTimeBillPrint.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RTPBrandMaster.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SearchProduct.cs" />
+    <Compile Include="Model\SecurityProfile.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SecurityProfile2.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceDetail.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceItem.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServiceModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ServiceModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SoftUser.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spJobCount_Result.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\spKPII_Result.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbBill.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbBill_FFC.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbGrade.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblDailyInOut.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblItemCap.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblItemCapModel.cs" />
+    <Compile Include="Model\tblServiceCharge.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbl_RptTechnicianPerformance.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbReminder.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbSM.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbSMSReceipentList.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbStoregeSET.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbTechPerformancSummary.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tbVATSetting.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TempMIS_Report.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TempService.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TransferJob.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VIEW1.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VW_Advance_Info.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\vw_BrandModel.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\VW_CashSales.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\vw_TransferJob.cs">
+      <DependentUpon>ServiceModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Implementation\BaseRepository.cs" />
+    <Compile Include="Service\Implementation\ClaimRepository.cs" />
+    <Compile Include="Service\Implementation\UnitOfWork.cs" />
+    <Compile Include="Service\Interface\IClaimRepository.cs" />
+    <Compile Include="Service\Interface\IRepository.cs" />
+    <Compile Include="Service\Interface\IUnitOfWork.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Model\ServiceModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ServiceModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\ServiceModel.edmx.diagram">
+      <DependentUpon>ServiceModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\ServiceModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ServiceModel.edmx</DependentUpon>
+      <LastGenOutput>ServiceModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\ServiceModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ServiceModel.edmx</DependentUpon>
+      <LastGenOutput>ServiceModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

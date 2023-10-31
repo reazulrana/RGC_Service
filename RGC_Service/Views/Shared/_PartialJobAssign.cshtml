@@ -1,0 +1,61 @@
+﻿@model RGC_Service.Models.RGC_Service_Project_Model.JobAssignViewModel
+
+<script>
+	$(document).ready(function () {
+
+
+		InitialLoadMethod();
+
+		$('#drdIssueTo').change(function () {
+			$(txtissueto).val($(this).val());
+
+		})
+
+	
+		function InitialLoadMethod() {
+			var value = $('#drdIssueTo option:selected').val();
+			if (value !="") {
+				$('#txtissueto').val(value);
+			}
+			
+		}
+
+	
+
+	})
+</script>
+<div class="card">
+	<div class="card-header bg-gradient-cyan">
+		<h3 class="card-title">Job Assign Details</h3>
+	</div>
+	<div class="card-body">
+		<div class="row mb-1">
+			@Html.HiddenFor(m=>m.JobCode)
+			@Html.LabelFor(m => m.IssueTo, new { @class = "control-label col-md-3" })
+			<div class="col-md-9">
+				@Html.DropDownListFor(m => m.IssueTo, Model.listEmployee, "Select Employee", new { @class = "form-control", @id = "drdIssueTo" })
+				<input id="txtissueto" disabled class="col-md-12" />
+			</div>
+		</div>
+		<div class="row mb-2">
+
+			@Html.LabelFor(m => m.IsssueDate, new { @class = "control-label col-md-3" })
+			<div class="col-md-9">
+				@Html.TextBoxFor(m => m.IsssueDate, "{0:dd/MMM/yy}", new { @class = "form-control datePicker" })
+			</div>
+		</div>
+
+		<div class="row">
+
+			<input type="submit" class="col-md-3 btn btn-primary btn-sm" value="Save" />
+			@Html.ActionLink("Abort", "Claiminfo", new { JobCode = Model.JobCode }, new { @class = "btn btn-danger btn-sm col-md-3" })
+			@Html.ActionLink("Abort", "Create", "NR", new { JobCode = Model.JobCode }, new { @class = "btn btn-danger btn-sm col-md-3" })
+
+			@Html.ActionLink("Pending", "Create", "Pending", new { JobCode = Model.JobCode }, new { @class = "btn btn-danger btn-sm col-md-3" })
+
+		</div>
+	</div>
+
+</div>
+
+@*.datePicker*@

@@ -1,0 +1,94 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@model JobStatusViewModel
+@{
+    ViewBag.Title = "JobStatus";
+}
+
+
+<fieldset disabled>
+
+		<div class="card">
+			<div class="card-header bg-cyan">
+				<h3 class="card-title">Claim Details</h3>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					@Html.HiddenFor(m => m.JobCode)
+					@Html.LabelFor(m => m.JobCode, new { @class = "control-label col-md-2" })
+					<div class="col-md-2">
+						@Html.TextBoxFor(m => m.JobCode, new { @class = "form-control" })
+					</div>
+
+					@Html.LabelFor(m => m.Branch, new { @class = "control-label col-md-2" })
+					<div class="col-md-2">
+						@Html.TextBoxFor(m => m.Branch, new { @class = "form-control" })
+					</div>
+
+					@Html.LabelFor(m => m.JobStatus, new { @class = "control-label col-md-2" })
+					<div class="col-md-2">
+						@Html.TextBoxFor(m => m.JobStatus, new { @class = "form-control text-highlight" })
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+    <div class="row mb-md-1">
+        <div class="col-md-5">
+            @Html.Partial("_PartialCustomerDetails", Model)
+        </div>
+
+        <div class="col-md-7">
+            @Html.Partial("_PartialDateInfo", Model)
+        </div>
+    </div>
+</fieldset>
+<div class="row mb-md-1">
+
+    <div class="col-md-5">
+        <fieldset disabled>
+            @Html.Partial("_PartialProductDetails", Model)
+        </fieldset>
+    </div>
+
+    <div class="col-md-7">
+        @Html.Partial("_PartialTabView", Model)
+    </div>
+</div>
+<fieldset disabled>
+    <div class="row">
+		<div class="col-md-7">
+			<div class="card">
+				<div class="card-header bg-gradient-cyan">
+					<h3 class="card-title">Product Details</h3>
+				</div>
+				<div class="card-body" style="min-height:325px">
+					<div class="row mb-md-1">
+						@Html.Partial("_PartialPartListJobWise", Model.ListofParts)
+					</div>
+					<div class="row  mb-md-1">
+						@Html.LabelFor(m => m.Remk, new { @class = "control-label col-md-4" })
+						<div class="col-md-8">
+							@Html.TextBoxFor(m => m.Remk, new { @class = "form-control" })
+						</div>
+					</div>
+
+					<div class="row">
+						@Html.LabelFor(m => m.MRNO, new { @class = "control-label col-md-4" })
+						<div class="col-md-8">
+							@Html.TextBoxFor(m => m.MRNO, new { @class = "form-control" })
+						</div>
+					</div>
+				</div>
+			</div>
+		
+
+		</div>
+		<div class="col-md-5">
+			@Html.Partial("_PartialDeliveryInfo", Model)
+		</div>
+    </div>
+</fieldset>
+

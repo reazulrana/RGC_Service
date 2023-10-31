@@ -1,0 +1,63 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+
+@model CreateJobViewModel
+
+
+@{
+    ViewBag.Title = "New Claim";
+
+}
+
+
+<!---------------------------CSS Section --------------------------------------->
+<style>
+    .radio-align {
+        margin-top: 40px;
+    }
+
+
+    label {
+        font-size: 16px;
+        font-weight: lighter;
+    }
+</style>
+
+<!--Jquery Section -->
+
+
+
+
+
+
+
+@using (Html.BeginForm("NewJob", "Claiminfo", FormMethod.Post))
+{
+    <div class="card">
+
+
+        <div class="card-header bg-info">
+            <h2 class="card-title">Create Job</h2>
+        </div>
+        <div class="card-body">
+
+
+     @Html.Partial("_PartialClaiminfo", Model)
+
+        </div>
+
+
+        @* ----------------------------------------- End of Card Body Row ---------------------------------------------------------------- *@
+
+
+
+        @* End of Card Body *@
+        <div class="card-footer bg-white">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="btSave" class="btn btn-sm btn-default btn-block col-md-3 offset-md-2">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

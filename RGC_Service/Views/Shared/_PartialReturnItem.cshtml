@@ -1,0 +1,15 @@
+﻿@using DAL_Service.Model
+@model List<tblItemCapModel>
+
+
+<div class="row">
+    @foreach (tblItemCapModel item in Model)
+    {
+
+        <label class="col-md-4">
+            <input name="btlItemCap" checked="@item.IsSelected" value="@item.cItem" type="checkbox" /> @item.cItem
+        </label>
+
+
+    }
+</div>

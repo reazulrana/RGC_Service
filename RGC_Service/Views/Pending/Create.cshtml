@@ -1,0 +1,137 @@
+﻿@using RGC_Service.Models.RGC_Service_Project_Model
+@model PendingViewModel
+@{
+	ViewBag.Title = "Pending";
+}
+
+<script type="text/javascript">
+	$(document).ready(function () {
+
+		GetEmployeeValue();
+		function GetEmployeeValue() {
+			var value = $("#drdPendingby option:selected").val();
+			if (value != "") {
+				$("#lblPendingBy").text(value);
+			}
+		}
+
+		$("#drdPendingby").change(function () {
+			$("#lblPendingBy").text($(this).val());
+
+		})
+
+
+	})
+</script>
+
+
+
+<div class="row">
+	<div class="col-md-12">
+
+		<div class="card">
+			@using (Html.BeginForm("Create", "Pending", FormMethod.Post))
+			{
+				Html.AntiForgeryToken();
+				<div class="card-header  bg-info text-white">
+					<h2 class="card-title">Pending</h2>
+				</div>
+				<div class="card-body">
+					@Html.HiddenFor(m => m.JobCode)
+					<div class="row mb-2">
+						@foreach (var p in Model.AllPending)
+						{
+							if (p.PenCode.ToLower() == "Other".ToLower())
+							{
+								//if (Model.PenCodeOthers != "")
+								//{
+								//	p.IsSelected = true;
+								//}
+								<div class="col-md-12">
+
+									<label class="control-label">
+										<input type="checkbox" name="PenCode" id="PenCode" value="@p.PenCode" checked="@p.IsSelected" /> @p.PenCode
+									</label>
+									<textarea class="form-control" cols="40" rows="5" name="PenCodeOthers" id="PenCodeOthers">@Model.PenCodeOthers</textarea>
+								</div>
+							}
+							else
+							{
+								<div class="col-md-6">
+
+									<label class="control-label">
+										<input type="checkbox" name="PenCode" id="PenCode" value="@p.PenCode" checked="@p.IsSelected" /> @p.PenCode
+									</label>
+								</div>
+							}
+
+						}
+					</div>
+
+
+
+
+
+
+
+					@* ------------------------------------------ End of Row ----------------------- *@
+
+					<div class="row mb-2">
+
+						<div class="col-md-8">
+							<div class="row">
+
+								<label class="control-label col-md-3">Pending By:</label>
+								<div class="col-md-4">
+									@Html.DropDownListFor(m => m.PendingBy, Model.LisofEmployee, "Selecte Employee", new { @class = "form-control", @id="drdPendingby" })
+								</div>
+								<label class="control-label col-md-5 bg-gray-light" id="lblPendingBy"></label>
+
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="row">
+
+
+								<label class="control-label col-md-3">Date:</label>
+								<div class="col-md-9">
+									@Html.TextBoxFor(m => m.PendingDate,"{0:dd-MMM-yy}", new { @class = "form-control datePicker" })
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+					@if (Model.IsModelValid == false) {
+					<div class="row mb-2">
+						<div class="col-md-12">
+							<p class="text-danger">
+								<b> No Pending Selected : </b> You Should Select At Least One Pending Reason
+
+							</p>
+						</div>
+					</div>
+					}
+
+
+					<div class="row">
+						<div class="col-md-3">
+							<input type="submit" class="btn btn-block btn-default btn-sm" value="Save">
+						</div>
+					</div>
+
+
+
+				</div>
+
+				@* ----------------------- End of Card Body  Part --------------------------*@
+
+				<div class="card-footer bg-info">
+
+				</div>
+			}
+
+		</div>
+
+	</div>
+</div>
